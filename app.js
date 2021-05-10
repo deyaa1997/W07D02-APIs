@@ -73,6 +73,41 @@ app.delete("/delete/todo/:name" , (req,res) => {
     }
 })
 
+app.put("/complete/todo/:name" , (req,res) => {
+    let find = false
+    let i ;
+    for (let x = 0 ; x < todos.length ; x++){
+        if(req.params.name === todos[x].todo){
+            find = true
+            i = x
+        }
+    }
+    if (find === true){
+        res.status(202)
+        todos[i].isCompleted = true
+        res.json(todos[i])
+    }else{
+        res.status(404)
+        res.json("Not Found :- You cant do this")
+    }
+})
+
+app.get("/completed/todos", (req, res) => {
+    const comp = []
+    for (let x = 0 ; x < todos.length ; x++){
+        if(todos[x].isCompleted === true){
+            comp.push(todos[x])
+        }
+    }
+    if (comp.length>0){
+        res.status(200)
+        res.json(comp)
+    }else{
+        res.status(404)
+        res.json("todos elements isNotCompleted")
+    }
+  });
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
