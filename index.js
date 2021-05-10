@@ -63,6 +63,20 @@ app.post("/create/user", (req, res) => {
   // res.json({ name, age })
 });
 
+app.get("/first-user", (req, res) => {
+    // set the response status code to 200 (OK)
+    res.status(200);
+    // sends back a response of first user
+    res.json(users[0]);
+  });
+
+  app.get("/", (req, res) => {
+    // set the response status code to 200 (OK)
+    res.status(200);
+    // When you open this link http://localhost:3000/ you will see : "hello world"
+    res.json("hello world");
+  });
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
